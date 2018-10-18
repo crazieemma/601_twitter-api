@@ -7,8 +7,9 @@
 - twitter.py
   Twitter API to access the twitter content
 
-- ffmpeg.py
+- ffmpeg.sh
   Use FFMPEG to convert images to videos
 
-- Google Vision analysis to describe the content 
+- google-cloud-vision.py
+  Google Vision analysis to describe the content 
 
