@@ -11,7 +11,7 @@ from PIL import ImageDraw
 client = vision.ImageAnnotatorClient()
 # The name of the image file to annotate
 
-for i in range(1,24):
+for i in range(1,36):
     name = str(i)+'.jpg'
     file_name = os.path.join(os.path.dirname(__file__),name)
 
@@ -33,6 +33,6 @@ for i in range(1,24):
     label_text_str=str(label_text)    
     img = Image.open(file_name)
     draw =  ImageDraw.Draw(img)
-    newfont=ImageFont.truetype('ubuntu.ttf',12)
+    newfont=ImageFont.truetype('ubuntu.ttf',12)  #you can change the ".ttf' to change the type of the labels
     draw.text((0,20),label_text_str,font=newfont)
     img.save(file_name)
