@@ -22,10 +22,10 @@ from PIL import ImageDraw
 
 
 #Twitter API credentials
-consumer_key = "7uDvEIWVgvxIOXwBWdAJ7UDfZ"  #enter the consumer_key
-consumer_secret = "nVrHW3yl9MF3BaAv2pixDIyTs7xUJcLncKOEsi55TKA5CaWjUN" #enter the consumer_secret
-access_key = "1039191468932558849-SJAeYD55KMhFkQSTgjBBk9z1KveKbx"   #enter the access_key
-access_secret = "Q8hdIVLKIJUE6azwAUVpYWNGVhTdij8f4KUbrPcgb0FTJ"   #enter the access_secret
+consumer_key = ""  #enter the consumer_key
+consumer_secret = "" #enter the consumer_secret
+access_key = ""   #enter the access_key
+access_secret = ""   #enter the access_secret
 #
 #@classmethod
 #def parse(cls, api, raw):
