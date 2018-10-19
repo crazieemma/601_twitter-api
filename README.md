@@ -22,6 +22,9 @@ Access_Secret = "xxxxxxxxxxxxx"
   Get Google Vision analysis to describe the content  
   Get labels on the images
 
+## whole_twitter_api.py  
+  The whole code for the project,after setting the envinorment,you can run this python file and you can get a video with labeled images.
+  
 ## Environment setting  
   pip install wget  
   pip install Pillow  
