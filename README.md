@@ -24,4 +24,5 @@ Access_Secret = "xxxxxxxxxxxxx"
 
 ## Environment setting  
   pip install wget  
-  pip install Pillow
+  pip install Pillow  
+  Download the "ubuntu.ttf" and put it into the same folder of the 'goole-cloud-vision.py'file
