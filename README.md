@@ -1,6 +1,11 @@
 # 601—mini project
-## twitter-api
+## Twitter-API
 ### Build a library (preferable in python) that downloads images from a twitter feed, convert them to a video and describe the content of the images in the video.
+## Database
+### Store all relevant information for everytime a user uses your application
+### Search for certain words and retrieve which user/session that has this work in it. 
+### Collective statistics about overall usage of the system. 
+
 
 # Content：
 
@@ -15,16 +20,8 @@ Access_Secret = "xxxxxxxxxxxxx"
 4.put your api credentials in the twitter.py  
 5.run twitter.py,you will see"Please input the twitter you want to download:",input the twitter account that you want to downlad image from,and you will get the images.
 
-## ffmpeg.sh  
-  Use FFMPEG to convert images to videos
+## 
 
-## google-cloud-vision.py  
-  Get Google Vision analysis to describe the content  
-  Get labels on the images
-
-## whole_twitter_api.py  
-  The whole code for the project,after setting the envinorment,you can run this python file and you can get a video with labeled images.
-  
 ## Environment setting  
   pip install wget  
   pip install Pillow  
