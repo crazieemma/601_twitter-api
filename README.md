@@ -31,6 +31,6 @@ Access_Secret = "xxxxxxxxxxxxx"
   Download the "ubuntu.ttf" and put it into the same folder of the 'goole-cloud-vision.py'file
   
   
-  #601-mini project3--DATABASE
-      MySQL(In branch sql_database)
-      MongoDB (In branch Mongo_database)
+  # 601-mini project3--DATABASE
+      * MySQL(In branch sql_database)
+      * MongoDB (In branch Mongo_database)
