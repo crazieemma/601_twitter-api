@@ -18,6 +18,7 @@ from google.cloud.vision import types
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
+import pymysql
 
 
 
@@ -48,10 +49,11 @@ def twitter_api(user_name):
 
 #Getting the tweets from a user
     api = tweepy.API(auth)
-    tweets = api.user_timeline(screen_name=user_name, 
-                           count=200, include_rts=False,
-                           exclude_replies=True)
-    last_id = tweets[-1].id  #save the id of the last tweets
+    alltweets = []
+    tweets = api.user_timeline(screen_name=user_name, count=20)
+    
+    alltweets.extend(tweets)
+    last_id = alltweets[-1].id-1  #save the id of the last tweets
      
 
     while (True):
@@ -65,19 +67,39 @@ def twitter_api(user_name):
             tweets = tweets + more_tweets
         if(len(tweets)>=10): #you can change the number if you want to download more images
             break
-        
+
+#write tweet objects to JSON
+    file = open('tweet.json', 'w')
+    print("Writing tweet objects to JSON please wait...")
+
 # Obtaining the full path for the images     
     media_files = set()
     for status in tweets:
         media = status.entities.get('media', [])
         if(len(media) > 0):
             media_files.add(media[0]['media_url'])
-# Download the images  
+# Download the images
+    i=0
     for media_file in media_files:
         wget.download(media_file)
+        i=i+1
+        print('%d images have been downloaded'%i)
+    image_num = i
+    print('%d images have been downloaded in total'%image_num)
+
+#connect mysql
+    db = pymysql.connect("localhost","root", password,"minipro3");
+    cursor = db.cursor()
+    sql = """INSERT INTO twitter_id(twitter_username, image_num) VALUES (%s,%s)"""
+    try:
+        cursor.execute(sql,(user_name,image_num))
+        db.commit()
+    except:
+        db.rollback()
+
         
 # Rename the images
-    path='/users/mac/Desktop/images' 
+    path='/Users/mac/Desktop/TWITTER/' 
     filelist = os.listdir(path)
     i=1
     total_num = len(filelist) 
@@ -92,17 +114,17 @@ def twitter_api(user_name):
             except:
                 continue
         print ('total %d to rename & converted %d jpgs' % (total_num, i))
-        
-    
+    return image_num
 
 if __name__ == '__main__':
     
-    twitter_api("@BU_Tweets")
+    account_name=sys.argv[1] 
+    image_num =twitter_api(account_name)
     
     client = vision.ImageAnnotatorClient()
 # The name of the image file to annotate
 
-    for i in range(1,24):
+    for i in range(1,image_num+1):
         name = str(i)+'.jpg'
     file_name = os.path.join(os.path.dirname(__file__),name)
 
@@ -121,7 +143,17 @@ if __name__ == '__main__':
         label_text.append(label.description)
         print(label.description)
 
-    label_text_str=str(label_text)    
+    label_text_str=str(label_text) 
+#connect mysql
+    db = pymysql.connect("localhost","root",password ,"minipro3");
+    cursor = db.cursor()
+    sql = """INSERT INTO image_label(twitter_username, image_label) VALUES (%s,%s)"""
+    try:
+        cursor.execute(sql,(account_name,label_text_str))
+        db.commit()
+    except:
+        db.rollback()
+        
     img = Image.open(file_name)
     draw =  ImageDraw.Draw(img)
     newfont=ImageFont.truetype('ubuntu.ttf',12)
