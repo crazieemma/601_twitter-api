@@ -159,5 +159,6 @@ if __name__ == '__main__':
     newfont=ImageFont.truetype('ubuntu.ttf',12)
     draw.text((0,20),label_text_str,font=newfont)
     img.save(file_name)
+    
 
 os.system("ffmpeg -framerate 1/5 -i %d.jpg -c:v libx264 -vf out.mp4")
