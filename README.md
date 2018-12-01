@@ -33,4 +33,4 @@ Access_Secret = "xxxxxxxxxxxxx"
   
   # 601-mini project3--DATABASE
       * MySQL(In branch sql_database)
-      * MongoDB (In branch Mongo_database)
+      * MongoDB (In branch database_mongoDB)
