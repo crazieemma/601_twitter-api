@@ -7,6 +7,7 @@ Created on Wed Nov 28 17:08:12 2018
 """
 
 import pymysql
+import sys
 
 def sqldb():
     try:
