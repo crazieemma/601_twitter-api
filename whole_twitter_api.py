@@ -18,6 +18,7 @@ from google.cloud.vision import types
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
+import pymongo
 
 
 
@@ -73,8 +74,27 @@ def twitter_api(user_name):
         if(len(media) > 0):
             media_files.add(media[0]['media_url'])
 # Download the images  
+    i=0
     for media_file in media_files:
         wget.download(media_file)
+        i=i+1
+        print('%d images have been downloaded'%i)
+    image_num = i
+    print('%d images have been downloaded in total'%image_num)
+    
+# connect and create mongoDB database
+    myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+    mydb = myclient["minipro3_mon"]
+    dblist = myclient.list_database_names()
+    if "mydatabase" in dblist:
+        print("The database exists.")
+    mycol = mydb["image_num"]
+    mydict = { "twitter_id": "user_name", "image_num":image_num}
+    Result = mycol.insert_one(mydict)
+    
+    return image_num
+    
+    
         
 # Rename the images
     path='/users/mac/Desktop/images' 
@@ -97,35 +117,48 @@ def twitter_api(user_name):
 
 if __name__ == '__main__':
     
-    twitter_api("@BU_Tweets")
+    account_name=sys.argv[1] 
+    image_num =twitter_api(account_name)
     
     client = vision.ImageAnnotatorClient()
 # The name of the image file to annotate
 
-    for i in range(1,24):
+    for i in range(1,image_num+1):
         name = str(i)+'.jpg'
-    file_name = os.path.join(os.path.dirname(__file__),name)
+        file_name = os.path.join(os.path.dirname(__file__),name)
 
 # Loads the image into memory
-    with io.open(file_name, 'rb') as image_file:
-        content = image_file.read()
+        with io.open(file_name, 'rb') as image_file:
+        	content = image_file.read()
 
-    image = types.Image(content=content)
+        image = types.Image(content=content)
+        response = client.label_detection(image=image)
+        labels = response.label_annotations
+        print('labels:')
+        
+        label_text = []
+        for label in labels: 
+        	label_text.append(label.description)
+        	print(label.description)
 
-    response = client.label_detection(image=image)
-    labels = response.label_annotations
+        label_text_str=str(label_text)
+        print(label_text_str)
 
-    print('labels:')
-    label_text = []
-    for label in labels: 
-        label_text.append(label.description)
-        print(label.description)
-
-    label_text_str=str(label_text)    
-    img = Image.open(file_name)
-    draw =  ImageDraw.Draw(img)
-    newfont=ImageFont.truetype('ubuntu.ttf',12)
-    draw.text((0,20),label_text_str,font=newfont)
-    img.save(file_name)
+        label_text_str=str(label_text)
+# connect and create mongoDB database
+        myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+        mydb = myclient["minipro3_mon"]
+        dblist = myclient.list_database_names()
+        if "mydatabase" in dblist:
+            print("The database exists.")
+        mycol = mydb["image_label"]
+        mydict = { "twitter_id": "account_name", "image_label":label_text_str}
+        Result = mycol.insert_one(mydict)
+        
+        img = Image.open(file_name)
+        draw =  ImageDraw.Draw(img)
+        newfont=ImageFont.truetype('ubuntu.ttf',12)
+        draw.text((0,20),label_text_str,font=newfont)
+        img.save(file_name)
 
 os.system("ffmpeg -framerate 1/5 -i %d.jpg -c:v libx264 -vf out.mp4")
