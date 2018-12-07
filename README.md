@@ -56,3 +56,6 @@ $ python3 setup.py install
   image_label VARCHAR(1000),   
   PRIMARY KEY(id) );
 ```
+
+### Search Information
+   You can run the [search.py](https://github.com/crazieemma/601_twitter-api/blob/sql_database/search.py) to get the twitter_id depending on your input label.And you can get the twitter_id whose image_num more than the number you input.
