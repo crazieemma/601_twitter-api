@@ -126,39 +126,39 @@ if __name__ == '__main__':
 
     for i in range(1,image_num+1):
         name = str(i)+'.jpg'
-    file_name = os.path.join(os.path.dirname(__file__),name)
+        file_name = os.path.join(os.path.dirname(__file__),name)
 
-# Loads the image into memory
-    with io.open(file_name, 'rb') as image_file:
-        content = image_file.read()
+    # Loads the image into memory
+        with io.open(file_name, 'rb') as image_file:
+            content = image_file.read()
 
-    image = types.Image(content=content)
+        image = types.Image(content=content)
 
-    response = client.label_detection(image=image)
-    labels = response.label_annotations
+        response = client.label_detection(image=image)
+        labels = response.label_annotations
 
-    print('labels:')
-    label_text = []
-    for label in labels: 
-        label_text.append(label.description)
-        print(label.description)
+        print('labels:')
+        label_text = []
+        for label in labels: 
+            label_text.append(label.description)
+            print(label.description)
 
-    label_text_str=str(label_text) 
-#connect mysql
-    db = pymysql.connect("localhost","root",password ,"minipro3");
-    cursor = db.cursor()
-    sql = """INSERT INTO image_label(twitter_username, image_label) VALUES (%s,%s)"""
-    try:
-        cursor.execute(sql,(account_name,label_text_str))
-        db.commit()
-    except:
-        db.rollback()
-        
-    img = Image.open(file_name)
-    draw =  ImageDraw.Draw(img)
-    newfont=ImageFont.truetype('ubuntu.ttf',12)
-    draw.text((0,20),label_text_str,font=newfont)
-    img.save(file_name)
+        label_text_str=str(label_text) 
+    #connect mysql
+        db = pymysql.connect("localhost","root",password ,"minipro3");
+        cursor = db.cursor()
+        sql = """INSERT INTO image_label(twitter_username, image_label) VALUES (%s,%s)"""
+        try:
+            cursor.execute(sql,(account_name,label_text_str))
+            db.commit()
+        except:
+            db.rollback()
+
+        img = Image.open(file_name)
+        draw =  ImageDraw.Draw(img)
+        newfont=ImageFont.truetype('ubuntu.ttf',12)
+        draw.text((0,20),label_text_str,font=newfont)
+        img.save(file_name)
     
 
 os.system("ffmpeg -framerate 1/5 -i %d.jpg -c:v libx264 -vf out.mp4")
