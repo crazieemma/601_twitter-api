@@ -86,10 +86,14 @@ def twitter_api(user_name):
     myclient = pymongo.MongoClient("mongodb://localhost:27017/")
     mydb = myclient["minipro3_mon"]
     dblist = myclient.list_database_names()
-    if "mydatabase" in dblist:
+    if "minipro3_mon" in dblist:
         print("The database exists.")
+        
     mycol = mydb["image_num"]
-    mydict = { "twitter_id": "user_name", "image_num":image_num}
+    if "image_num" in collist:
+        print("The collection exists.")
+        
+    mydict = { "twitter_id":user_name, "image_num":image_num}
     Result = mycol.insert_one(mydict)
     
     return image_num
@@ -145,14 +149,17 @@ if __name__ == '__main__':
         print(label_text_str)
 
         label_text_str=str(label_text)
+        
 # connect and create mongoDB database
         myclient = pymongo.MongoClient("mongodb://localhost:27017/")
         mydb = myclient["minipro3_mon"]
         dblist = myclient.list_database_names()
-        if "mydatabase" in dblist:
+        if "minipro3_mon" in dblist:
             print("The database exists.")
         mycol = mydb["image_label"]
-        mydict = { "twitter_id": "account_name", "image_label":label_text_str}
+        if "image_label" in collist:
+        print("The collection exists.")
+        mydict = { "twitter_id": account_name, "image_label":label_text_str}
         Result = mycol.insert_one(mydict)
         
         img = Image.open(file_name)
