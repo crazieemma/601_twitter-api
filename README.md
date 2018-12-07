@@ -26,3 +26,33 @@ Access_Secret = "xxxxxxxxxxxxx"
   pip install wget  
   pip install Pillow  
   Download the "ubuntu.ttf" and put it into the same folder of the 'goole-cloud-vision.py'file
+
+## DATABESE
+### Install SQl
+```
+$ git clone https://github.com/PyMySQL/PyMySQL
+$ cd PyMySQL/
+$ python3 setup.py install
+```
+
+### Create SQL database. 
+  You can run the following code in terminal to go into the database and create the Table,or you can just run the sql_database.py
+```
+  alias mysql=/usr/local/mysql/bin/mysql
+  alias mysqladmin=/usr/local/mysql/bin/mysqladmin
+  mysql -u root -p
+```
+```
+  CREATE TABLE twitter_id(   
+  id INT NOT NULL AUTO_INCREMENT,  
+  twitter_username VARCHAR(45),  
+  image_num INT NOT NULL,  
+  PRIMARY KEY (id) ); 
+```
+```
+  CREATE TABLE images(   
+  id INT NOT NULL AUTO_INCREMENT,  
+  twitter_username VARCHAR(45),  
+  image_label VARCHAR(1000),   
+  PRIMARY KEY(id) );
+```
