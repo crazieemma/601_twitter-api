@@ -36,7 +36,7 @@ $ python3 setup.py install
 ```
 
 ### Create SQL database. 
-  You can run the following code in terminal to go into the database and create the Table,or you can just run the sql_database.py
+  You can run the following code in terminal to go into the database and create the Table,or you can just run the [sql_database.py](https://github.com/crazieemma/601_twitter-api/blob/sql_database/sql_database.py)
 ```
   alias mysql=/usr/local/mysql/bin/mysql
   alias mysqladmin=/usr/local/mysql/bin/mysqladmin
@@ -50,7 +50,7 @@ $ python3 setup.py install
   PRIMARY KEY (id) ); 
 ```
 ```
-  CREATE TABLE images(   
+  CREATE TABLE image_label(   
   id INT NOT NULL AUTO_INCREMENT,  
   twitter_username VARCHAR(45),  
   image_label VARCHAR(1000),   
