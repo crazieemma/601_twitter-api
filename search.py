@@ -9,51 +9,70 @@ Created on Wed Nov 28 17:08:12 2018
 import pymysql
 import sys
 
-def sqldb():
+def sql_db():
     try:
         db = pymysql.connect("localhost","root", password,"minipro3");
     except:
-        print("error!Please check your password")
+        print("error!Please check your informations")
     return db
 
-def sqlsearch(keywords):
-    db = sqldb()
+def search_label(keywords):
+    db = sql_db()
     cursor = db.cursor()
-    sql='SELECT twitter_username FROM image_label WHERE image_label like "%{}%"'.format(keywords)'
+    sql='SELECT twitter_username FROM image_label WHERE image_label like "%{}%"'.format(keywords)
     try:
         cursor.excute(sql)
-        account=cursor.fetchall()
+        account_id=cursor.fetchall()
     except:
         print("error!")
         
     username=[]
-    for i in account:
+    for i in account_id:
         if i not in username:
             username.append(i)
     print("the label you are searching for are in the following account:")
     if username: 
         print(username)
     else:
-        print("there is no account")
+        print("there is no account that fit your search")
+        
+def search_num(num):
+    db = sql_db()
+    cursor = db.cursor()
+    sql = "SELECT twitter_username FROM twitter_id WHERE image_num > %s"%(num)
+    try:
+        cursor.excute(sql)
+        account_id=cursor.fetchall()
+    except:
+        print("error!")
+    twitter_id=[]
+    for i in account_id:
+        if i not in username:
+            username.append(i)
+    print("the user you are searching for are: ")
+    if twitter_id: 
+        print(twitter_id)
+    else:
+        print("there is no account that fit your search")
         
 
 if __name__ == '__main__':
-    db = sqldb()
+    '''
+    db = sql_db()
     cursor = db.cursor()
-    sql_1 = 'SELECT twitter_username,image_num FROM twitter_id ORDER BY image_num'
-    sql_2 = 'SELECT twitter_username,image_label FROM image_label'
+    sql= "SELECT twitter_username FROM twitter_id ORDER BY image_num"
     try:
         cursor.excute(sql_1)
-        cursor.excute(sql_2)
         db_num = cursor.fetchall()
-        db_label = cursor.fetchall()
     except:
         print("error")
+        
     print("the twitter_id is")
     print(db_num)
-    print("the image_label is")
-    print(db_label)
+    '''
     
     keyword = sys.argv[1]
-    sqlsearch(keyword)
+    num = sys.argv[2]
+    search_label(keyword)
+    search_num(num)
     
