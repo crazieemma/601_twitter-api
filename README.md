@@ -32,5 +32,5 @@ Access_Secret = "xxxxxxxxxxxxx"
   
   
   # 601-mini project3--DATABASE
-      * MySQL(In branch [sql_database](https://github.com/crazieemma/601_twitter-api/tree/sql_database))
-      * MongoDB (In branch [database_mongoDB](https://github.com/crazieemma/601_twitter-api/tree/database_mongoDB))
+      * MySQL ---- branch [sql_database](https://github.com/crazieemma/601_twitter-api/tree/sql_database)
+      * MongoDB ---- branch [database_mongoDB](https://github.com/crazieemma/601_twitter-api/tree/database_mongoDB)
