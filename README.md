@@ -31,6 +31,20 @@ Access_Secret = "xxxxxxxxxxxxx"
   Download the "ubuntu.ttf" and put it into the same folder of the 'goole-cloud-vision.py'file
   
   
-  # 601-mini project3--DATABASE
-      * MySQL(In branch sql_database)
-      * MongoDB (In branch Mongo_database)
+## Create Database
+### install MongoDB
+```
+pip install pymongo
+```
+### create mongoDB database
+```
+import pymongo
+
+myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+
+mydb = myclient["mydatabase"]
+```
+or you can run the [whole_twitter_api](https://github.com/crazieemma/601_twitter-api/blob/database_mongoDB/whole_twitter_api.py),because a collection is not created until it gets content in MongoDB,so insert data into it before you check if the collection exists!
+
+### Search   
+You can run the [search.py](https://github.com/crazieemma/601_twitter-api/blob/database_mongoDB/search.py) to find the data that fit your keywords or numbers.
