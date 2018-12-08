@@ -5,7 +5,7 @@
 # Content：
 
 ## twitter.py----Twitter API to access the twitter content  
-1.you need to create a twitter app,visit this website:https://developer.twitter.com  
+1.you need to create a twitter app,visit this [website](https://developer.twitter.com)  
 2.sign in with your twitter account and create a New Application  
 3.Create Your Access Token.Once you’ve done this, make a note of your Twitter API credentials  
 Consumer_Key = “xxxxxxxxxxxx”   
@@ -31,6 +31,7 @@ Access_Secret = "xxxxxxxxxxxxx"
   Download the "ubuntu.ttf" and put it into the same folder of the 'goole-cloud-vision.py'file
   
   
-  # 601-mini project3--DATABASE
-      * MySQL ---- branch [sql_database](https://github.com/crazieemma/601_twitter-api/tree/sql_database)
-      * MongoDB ---- branch [database_mongoDB](https://github.com/crazieemma/601_twitter-api/tree/database_mongoDB)
+  # 601-mini project3--DATABASE.   
+   MySQL ---- branch [sql_database](https://github.com/crazieemma/601_twitter-api/tree/sql_database). 
+   
+   MongoDB ---- branch [database_mongoDB](https://github.com/crazieemma/601_twitter-api/tree/database_mongoDB)
