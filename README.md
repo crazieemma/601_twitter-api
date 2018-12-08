@@ -24,10 +24,16 @@ Access_Secret = "xxxxxxxxxxxxx"
 
 ## whole_twitter_api.py  
   The whole code for the project,after setting the envinorment,you can run this python file and you can get a video with labeled images.
-  
+
 ## Environment setting  
+```
   pip install wget  
   pip install Pillow  
+```
+```
+  pip install --upgrade google-cloud-vision
+  export GOOGLE_APPLICATION_CREDENTIALS="./credential.json"
+```
   Download the "ubuntu.ttf" and put it into the same folder of the 'goole-cloud-vision.py'file
   
   
